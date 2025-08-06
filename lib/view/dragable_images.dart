@@ -32,7 +32,7 @@ class _DraggableimagesState extends State<Draggableimages> with SingleTickerProv
     return Scaffold(
         appBar: AppBar(
           title: Center(child: Text("Draggable Images",style: TextStyle(color: Colors.white),)),
-          backgroundColor: Colors.blue[200],
+          backgroundColor: Colors.blue[300],
         ),
         body: SingleChildScrollView(
           child: Center(
@@ -63,9 +63,10 @@ class _DraggableimagesState extends State<Draggableimages> with SingleTickerProv
 
   Widget buildDragTarget(int index, double size) {
     return DragTarget<int>(
-      onWillAccept: (fromIndex) => fromIndex != index,
-      onAccept: (fromIndex) {
+      onWillAcceptWithDetails: (fromIndex) => fromIndex != index,
+      onAcceptWithDetails: (details) {
         setState(() {
+          final fromIndex = details.data;
           final temp = images[fromIndex];
           images[fromIndex] = images[index];
           images[index] = temp;
